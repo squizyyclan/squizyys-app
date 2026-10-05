@@ -1,0 +1,42 @@
+name: Windows-App bauen
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Website-Adresse eintragen (aus der Repo-Variable SITE_URL, falls gesetzt)
+        shell: bash
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          if [ -n "$SITE_URL" ]; then
+            node -e "require('fs').writeFileSync('config.json', JSON.stringify({ url: process.env.SITE_URL }))"
+          fi
+          cat config.json
+
+      - run: npm install
+
+      - run: npm run dist
+
+      - name: Release veröffentlichen
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Squizyys Desktop-App
+          body: Windows-App (portable .exe). Einfach herunterladen und starten.
+          files: dist/Squizyys-App.exe
+          make_latest: true

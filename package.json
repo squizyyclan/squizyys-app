@@ -1,0 +1,22 @@
+{
+  "name": "squizyys-app",
+  "version": "1.0.0",
+  "description": "Desktop-App der Clan-Website",
+  "main": "main.js",
+  "author": "Squizyys Clan",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "de.clan.squizyys.app",
+    "productName": "Squizyys",
+    "artifactName": "Squizyys-App.${ext}",
+    "files": ["main.js", "offline.html", "config.json", "icon.png"],
+    "win": { "target": "portable", "icon": "icon.png" }
+  }
+}

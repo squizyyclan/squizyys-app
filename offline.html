@@ -1,0 +1,7 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Keine Verbindung</title>
+<style>body{margin:0;min-height:100vh;display:grid;place-content:center;text-align:center;background:#090b0f;color:#eef1f6;font:16px/1.6 system-ui,sans-serif;padding:20px}
+h1{margin:0 0 8px}p{color:#8a93a3;max-width:420px;margin:0 auto 22px}a{display:inline-block;padding:11px 22px;border-radius:8px;background:#a855f7;color:#fff;font-weight:700;text-decoration:none}</style></head>
+<body><div><h1>😕 Keine Verbindung</h1><p id="t">Die Website ist gerade nicht erreichbar. Prüfe deine Internetverbindung und versuche es erneut.</p><a id="r" href="#">Erneut versuchen</a></div>
+<script>const u=new URLSearchParams(location.search).get('u');
+if(u)document.getElementById('r').href=u;
+else{document.getElementById('t').textContent='In der App ist noch keine Website-Adresse eingestellt (config.json).';document.getElementById('r').remove()}</script></body></html>
